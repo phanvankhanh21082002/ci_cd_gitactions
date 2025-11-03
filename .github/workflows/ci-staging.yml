@@ -24,7 +24,7 @@ jobs:
 
       # 3. (Tùy chọn) Dùng GitHub Token để thực hiện các thao tác khác
       - name: Use GitHub Token
-        run: echo "GitHub token hợp lệ: ${{ secrets.TOKEN_GITHUB }}"
+        run: "GitHub token hợp lệ: ${{ secrets.GITHUB_TOKEN }}"
 
       # 4. Build Docker image
       - name: Build Docker image
