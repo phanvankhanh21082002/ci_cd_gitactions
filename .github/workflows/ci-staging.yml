@@ -1,6 +1,5 @@
 name: CI/CD for Staging
 
-# ✅ Trigger khi có code push lên branch staging
 on:
   push:
     branches:
@@ -23,10 +22,14 @@ jobs:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_TOKEN }}
 
-      # 3. Build Docker image (tag theo branch staging)
+      # 3. (Tùy chọn) Dùng GitHub Token để thực hiện các thao tác khác
+      - name: Use GitHub Token
+        run: "Token hợp lệ: ${{ secrets.GITHUB_TOKEN }}"
+
+      # 4. Build Docker image
       - name: Build Docker image
         run: docker build -t ${{ secrets.DOCKER_USER }}/ci-cd-staging-demo:staging .
 
-      # 4. Push Docker image lên Docker Hub
+      # 5. Push Docker image
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKER_USER }}/ci-cd-staging-demo:staging
