@@ -23,8 +23,11 @@ jobs:
           password: ${{ secrets.DOCKER_TOKEN }}
 
       # 3. (Tùy chọn) Dùng GitHub Token để thực hiện các thao tác khác
-      - name: Use GitHub Token
-        run: "GitHub token hợp lệ: ${{ secrets.GITHUB_TOKEN }}"
+      - run: |
+          gh issue --repo ${{ github.repository }} \
+            create --title "Issue title" --body "Issue body"
+        env:
+          GH_TOKEN: ${{ secrets.TOKEN_GITHUB }}
 
       # 4. Build Docker image
       - name: Build Docker image
